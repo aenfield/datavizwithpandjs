@@ -2,3 +2,5 @@
 data
 keys.txt
 *.sqlite
+__pycache__
+*.json
