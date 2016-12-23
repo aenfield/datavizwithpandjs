@@ -28,6 +28,10 @@ class NWinnerSpider(scrapy.Spider):
     start_urls = [
         "https://en.wikipedia.org/wiki/List_of_Nobel_laureates_by_country"
     ]
+
+    custom_settings = {
+        'ITEM_PIPELINES':{'nobel_winners_scrapy.pipelines.DropNonPersons': 1}
+    }
     
     # parse deals with the HTTP response
     def parse(self, response):

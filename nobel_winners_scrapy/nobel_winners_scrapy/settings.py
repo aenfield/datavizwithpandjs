@@ -64,9 +64,14 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
+
+# We'll define the pipelines in the spiders themselves, since we have different
+# pipeline code we want to run for different spiders - see our use of custom_settings
 #ITEM_PIPELINES = {
-#    'nobel_winners_scrapy.pipelines.SomePipeline': 300,
+#   'nobel_winners_scrapy.pipelines.DropNonPersons': 1,
+#   'nobel_winners_scrapy.pipelines.NobelImagesPipeline': 1
 #}
+#IMAGES_STORE = 'images'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
