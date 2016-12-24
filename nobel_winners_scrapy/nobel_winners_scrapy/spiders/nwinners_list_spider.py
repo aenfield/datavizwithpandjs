@@ -29,9 +29,22 @@ class NWinnerSpider(scrapy.Spider):
         "https://en.wikipedia.org/wiki/List_of_Nobel_laureates_by_country"
     ]
 
-    custom_settings = {
-        'ITEM_PIPELINES':{'nobel_winners_scrapy.pipelines.DropNonPersons': 1}
-    }
+    # for some reason, when I include the pipeline below, the output ends up
+    # being output, possibly?, three times, and one of them - in the middle - 
+    # looks like UTF-16. This occurs regardless of what I specify for 
+    # FEED_EXPORT_ENCODED - i.e., if we take the default (a special kind of 
+    # UTF-8, I think), or say UTF-8, or say UTF-16, then we get text that looks
+    # like a combination of UTF-8 and UTF-16. Once I don't use the pipeline
+    # below, then UTF-8 and UTF-16 both appear to work as expected.
+    # When I say that I see both UTF-8 and UTF-16 - the middle set of data has
+    # hex 00 between each xx character, and the FFFE byte order mark, and 
+    # trying to load with df.read_json gives a 'UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 2673140: invalid start byte' 
+    # error - the 0xff is the first part of the BOM, i think. In addition, it
+    # looks like the output has three arrays? at least i see three left brackets
+    # at the beginning of the output file.
+    # custom_settings = {
+    #     'ITEM_PIPELINES':{'nobel_winners_scrapy.pipelines.DropNonPersons': 1}
+    # }
     
     # parse deals with the HTTP response
     def parse(self, response):
