@@ -5,3 +5,4 @@ keys.txt
 __pycache__
 *.json
 nobel_winners_scrapy/.scrapy
+output*.txt

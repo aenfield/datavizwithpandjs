@@ -14,6 +14,12 @@ BOT_NAME = 'nobel_winners_scrapy'
 SPIDER_MODULES = ['nobel_winners_scrapy.spiders']
 NEWSPIDER_MODULE = 'nobel_winners_scrapy.spiders'
 
+# set the JSON export to use UTF-8 explicitly, per https://doc.scrapy.org/en/latest/topics/feed-exports.html#feed-export-encoding,
+# to hopefully avoid issues reading this w/ Python 3
+#FEED_EXPORT_ENCODING = 'utf-8'
+FEED_EXPORTERS = {
+    'json': 'nobel_winners_scrapy.exporters.Utf8JsonItemExporter'
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'nobel_winners_scrapy (+http://www.yourdomain.com)'
